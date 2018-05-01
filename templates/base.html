@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+
+<!--
+	Typify by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+
+<html>
+	<head>
+		<title>
+		{% block title %} {% endblock %}
+		</title>
+		<link rel="shortcut icon" type="image/x-ico" href="{{ url_for('static', filename='images/favicon.ico') }}"/>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}" />
+	</head>
+	<body>
+
+    {% block content %} {% endblock %}
+
+  	<!-- Footer -->
+			<footer id="footer">
+				<div class="copyright">
+					&copy; 2018 made with <a href="http://flask.pocoo.org/">Flask</a>.
+				</div>
+			</footer>
+
+  	<!-- Scripts -->
+			<script type="text/javascript" src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
+			<script type="text/javascript" src="{{ url_for('static', filename='assets/js/skel.min.js') }}"></script>
+			<script type="text/javascript" src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
+			<script type="text/javascript" src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+
+  </body>
+</html>

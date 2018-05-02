@@ -15,27 +15,25 @@
 		</section>
 
 	<!-- One -->
+		{% from "_macro.html" import render_field %}
+
 		<section id="one" class="wrapper style2 special">
 			<div class="inner narrow">
 				<header>
 					<h2>Register your pet</h2>
 				</header>
-				<form class="grid-form" method="post" action="#">
+				<form class="grid-form" method="post" enctype="multipart/form-data">
 					<div class="form-control narrow">
-						<label for="name">Name pet</label>
-						<input name="name" id="name" type="text">
+						{{ render_field(form_pet.name) }}
 					</div>
 					<div class="form-control narrow">
-						<label for="email">Race</label>
-						<input name="race" id="race" type="text">
+						{{ render_field(form_pet.race) }}
 					</div>
 					<div class="form-control narrow">
-						<label for="age">Age</label>
-						<input name="age" id="age" type="text">
+						{{ render_field(form_pet.age) }}
 					</div>
 					<div class="form-control narrow">
-						<label for="owner">Owner</label>
-						<input name="owner" id="owner" type="text">
+						{{ render_field(form_pet.owner) }}
 					</div>
 					<ul class="actions">
 						<li><input value="Register" type="submit"></li>
@@ -54,10 +52,12 @@
 				<header>
 					<h2>Query you pets</h2>
 				</header>
-				<form class="grid-form" method="post" action="#">
+				<form class="grid-form" method="post" enctype="multipart/form-data">
+
+					{{ form_owner.csrf_token }}
+
 					<div class="form-control">
-						<label for="name">Name owner</label>
-						<input name="owner" id="owner" type="text">
+						{{ render_field(form_owner.owner) }}
 					</div>
 					<ul class="actions">
 						<li><input value="Query" type="submit"></li>
@@ -453,29 +453,22 @@
 							<p>Felis sagittis eget tempus primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Magna sed etiam ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus lorem ipsum dolor sit amet nullam.</p>
 						</div>
 
-						<h3>Preformatted</h3>
-						<pre><code>i = 0;
-						while (!deck.isInOrder()) {
-						print 'Iteration ' + i;
-						deck.shuffle();
-						i++;
-						}
+													<h3>Preformatted</h3>
+													<pre><code>i = 0;
 
-						print 'It took ' + i + ' iterations to sort the deck.';
-						</code></pre>
+while (!deck.isInOrder()) {
+    print 'Iteration ' + i;
+    deck.shuffle();
+    i++;
+}
+
+print 'It took ' + i + ' iterations to sort the deck.';
+</code></pre>
+
+												</div>
+											</div>
 
 										</div>
-									</div>
-
-								</div>
-							</section>
-	-->
-
-	<!-- Scripts -->
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/skel.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-		<script src="assets/js/main.js"></script>
-
+									</section>
+								-->
 	{% endblock %}

@@ -1,6 +1,5 @@
 from wtforms import Form, StringField, TextField, validators, HiddenField
 
-from validations import validation_honeypot
 
 # Create your forms
 
@@ -11,7 +10,7 @@ class PetForm(Form):
     race = StringField('Race', [validators.Required(message = 'Required race.'), ])
     age = StringField('Age', [validators.Required(message = 'Required age.'), ])
     owner = StringField('Owner', [validators.Required(message = 'Required owner.'), ])
-    honeypot = HiddenField('', [validation_honeypot])
+    honeypot = HiddenField('', [validators.Length(min = 0, max = 0)])
 
-class PropertyForm(Form):
+class OwnerForm(Form):
     owner = StringField('Owner', [validators.Required(message = 'Required owner.')])

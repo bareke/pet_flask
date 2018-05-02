@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %} Registered successful {% endblock %}
+
+{% block content %}
+  <section id="banner">
+    <p>Welcome {{ owner }} </p>
+    <p>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul>
+            {% for message in messages %}
+              <li> {{ message }} </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </p>
+    <a href="/index" class="button special">Back</a>
+  </section>
+
+{% endblock %}

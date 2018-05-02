@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+		{% block title %} Query pets {% endblock %}
+
+		{% block content %}
+
+		<section id="one" class="wrapper special">
+
+			<div class="inner narrow">
+				{% if results %}
+				<h2 id="elements">Results</h2>
+				<div class="table-wrapper">
+					<table>
+	          <thead>
+	            <tr>
+	              <th>Name</th>
+	              <th>Race</th>
+	              <th>Age</th>
+	              <th>Owner</th>
+	            </tr>
+	          </thead>
+	          <tbody>
+							{% for result in results %}
+	            <tr>
+	              <td> {{ result.name }} </td>
+	              <td> {{ result.race }} </td>
+	              <td> {{ result.age }} </td>
+	              <td> {{ result.owner }} </td>
+	            </tr>
+							{% endfor %}
+	          </tbody>
+        	</table>
+      	</div>
+    	</div>
+
+			{% else %}
+				<h2 id="elements">There are no results for your query :(</h2>
+			{% endif %}
+
+			<a href="/index" class="button special">Back</a>
+		</section>
+
+    {% endblock %}

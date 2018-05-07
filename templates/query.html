@@ -5,29 +5,28 @@
 		{% block content %}
 
 		<section id="one" class="wrapper special">
-
 			<div class="inner narrow">
-				{% if results %}
+				{% if result %}
 				<h2 id="elements">Results</h2>
 				<div class="table-wrapper">
 					<table>
 	          <thead>
 	            <tr>
 	              <th>Name</th>
-	              <th>Race</th>
+	              <th>Type pet</th>
 	              <th>Age</th>
 	              <th>Owner</th>
+								<th>Image</th>
 	            </tr>
 	          </thead>
 	          <tbody>
-							{% for result in results %}
 	            <tr>
 	              <td> {{ result.name }} </td>
-	              <td> {{ result.race }} </td>
+	              <td> {{ result.type_pet }} </td>
 	              <td> {{ result.age }} </td>
 	              <td> {{ result.owner }} </td>
+								<td> <img src="data:;base64,{{ image }}" width="50"> </td>
 	            </tr>
-							{% endfor %}
 	          </tbody>
         	</table>
       	</div>

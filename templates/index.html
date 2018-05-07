@@ -27,13 +27,17 @@
 						{{ render_field(form_pet.name) }}
 					</div>
 					<div class="form-control narrow">
-						{{ render_field(form_pet.race) }}
+						{{ render_field(form_pet.type_pet) }}
 					</div>
 					<div class="form-control narrow">
 						{{ render_field(form_pet.age) }}
 					</div>
 					<div class="form-control narrow">
 						{{ render_field(form_pet.owner) }}
+					</div>
+					<div class="form-control">
+						<label for="name">Image</label>
+						<input name="file" id="file" type="file">
 					</div>
 					<ul class="actions">
 						<li><input value="Register" type="submit"></li>
@@ -53,9 +57,6 @@
 					<h2>Query you pets</h2>
 				</header>
 				<form class="grid-form" method="post" enctype="multipart/form-data">
-
-					{{ form_owner.csrf_token }}
-
 					<div class="form-control">
 						{{ render_field(form_owner.owner) }}
 					</div>

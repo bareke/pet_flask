@@ -4,7 +4,7 @@
 
 {% block content %}
   <section id="banner">
-    <p> Hello {{ owner }} </p>
+    <p> Hello </p>
     <p>
       {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -16,7 +16,7 @@
         {% endif %}
       {% endwith %}
     </p>
-    <a href="/index" class="button special">Back</a>
+    <a href="{{ url_for('app_pet.index') }}" class="button special">Back</a>
   </section>
 
 {% endblock %}

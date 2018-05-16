@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+		{% block title %} Query pets {% endblock %}
+
+		{% block content %}
+
+		<section id="one" class="wrapper special">
+			<div class="inner narrow">
+
+				{% if results %}
+
+				<h2 id="elements">Results</h2>
+				<div class="table-wrapper">
+					<table>
+	          <thead>
+	            <tr>
+	              <th>Name</th>
+	              <th>Type</th>
+	              <th>Age</th>
+	              <th>Adopt</th>
+								<th>Details</th>
+	            </tr>
+	          </thead>
+	          <tbody>
+
+							{% for result in results %}
+
+	            <tr>
+	              <td> {{ result.name_pet }} </td>
+	              <td> {{ result.type_pet }} </td>
+
+								{% if result.age_pet > 1 %}
+								<td> {{ result.age_pet }} years </td>
+								{% else %}
+								<td> {{ result.age_pet }} year </td>
+								{% endif %}
+
+								{% if result.adopt == True %}
+								<td> Yes </td>
+								{% else %}
+								<td> Available </td>
+								{% endif %}
+
+								<td> <a class="button" href="{{ url_for('app_pet.details_pet', id_pet = result.id_pet) }}">Details</a> </td>
+
+	            </tr>
+
+							{% endfor %}
+
+	          </tbody>
+        	</table>
+      	</div>
+				
+			{% else %}
+				<h2 id="elements">There are no results for your query :(</h2>
+			{% endif %}
+
+			<a href="{{ url_for('app_pet.index') }}" class="button special">Back</a>
+		</section>
+
+    {% endblock %}

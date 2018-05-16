@@ -4,43 +4,79 @@
 
 	{% block content %}
 
+	{% from "macros/_macro.html" import render_field %}
+
 	<!-- Banner -->
 		<section id="banner">
 			<h2><strong>Pet</strong></h2>
-			<p>Register or query yours pets in the database</p>
+			<p>Adopt or register a pet</p>
 			<ul class="actions">
-				<li><a href="#one" class="button special">Register</a></li>
-				<li><a href="#two" class="button special">Query</a></li>
+				<li><a href="#one" class="button special">Register person</a></li>
+				<li><a href="#two" class="button special">Register pet</a></li>
+				<li><a href="#three" class="button special">Adopt pet</a></li>
 			</ul>
 		</section>
 
 	<!-- One -->
-		{% from "_macro.html" import render_field %}
-
 		<section id="one" class="wrapper style2 special">
 			<div class="inner narrow">
 				<header>
-					<h2>Register your pet</h2>
+					<h2>Register to adopt</h2>
 				</header>
 				<form class="grid-form" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 					<div class="form-control narrow">
-						{{ render_field(form_pet.name) }}
+						{{ render_field(form_person.name_person) }}
+					</div>
+					<div class="form-control narrow">
+						{{ render_field(form_person.last_name_person) }}
+					</div>
+					<div class="form-control narrow">
+						{{ render_field(form_person.telephone_person) }}
+					</div>
+					<div class="form-control narrow">
+						{{ render_field(form_person.email_person) }}
+					</div>
+					<!-- <div class="form-control">
+						<label for="name">Image</label>
+						<input name="file" id="file" type="file">
+					</div> -->
+					<div class="form-control narrow">
+						{{ form_person.honeypot }}
+					</div>
+					<ul class="actions">
+						<li><input name="register person" value="Register person" type="submit"></li>
+					</ul>
+				</form>
+			</div>
+		</section>
+
+	<!-- Two -->
+		<section id="two" class="wrapper style2 special">
+			<div class="inner narrow">
+				<header>
+					<h2>Register a pet for adoption</h2>
+				</header>
+				<form class="grid-form" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+					<div class="form-control narrow">
+						{{ render_field(form_pet.name_pet) }}
 					</div>
 					<div class="form-control narrow">
 						{{ render_field(form_pet.type_pet) }}
 					</div>
 					<div class="form-control narrow">
-						{{ render_field(form_pet.age) }}
+						{{ render_field(form_pet.age_pet) }}
 					</div>
-					<div class="form-control narrow">
-						{{ render_field(form_pet.owner) }}
-					</div>
-					<div class="form-control">
+					<!-- <div class="form-control">
 						<label for="name">Image</label>
 						<input name="file" id="file" type="file">
+					</div> -->
+					<div class="form-control narrow">
+						{{ form_pet.honeypot }}
 					</div>
 					<ul class="actions">
-						<li><input value="Register" type="submit"></li>
+						<li><input name="register pet" value="Register pet" type="submit"></li>
 					</ul>
 				</form>
 			</div>
@@ -50,25 +86,29 @@
 		<section id="" class="wrapper style1 special">
 		</section>
 
-	<!-- Two -->
-		<section id="two" class="wrapper style2 special">
+	<!-- Three -->
+		<section id="three" class="wrapper style2 special">
 			<div class="inner narrow">
 				<header>
-					<h2>Query you pets</h2>
+					<h2>Query pets to adopt</h2>
 				</header>
 				<form class="grid-form" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 					<div class="form-control">
-						{{ render_field(form_owner.owner) }}
+						{{ render_field(form_query_pet.query_type_pet) }}
+					</div>
+					<div class="form-control narrow">
+						{{ form_query_pet.honeypot }}
 					</div>
 					<ul class="actions">
-						<li><input value="Query" type="submit"></li>
+						<li><input name="query pet" value="Query pet" type="submit"></li>
 					</ul>
 				</form>
 			</div>
 		</section>
 
-	<!-- Three -->
-	<!--
+	<!-- Four -->
+		<!--
 		<section id="three" class="wrapper">
 			<div class="inner">
 

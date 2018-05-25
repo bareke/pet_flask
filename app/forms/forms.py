@@ -5,6 +5,11 @@ from wtforms.fields.html5 import EmailField
 
 # Create your forms
 
+class BaseForm(Form):
+    """ Mitiga formaularios basura """
+    honeypot = HiddenField('', validators=[Length(min = 0, max = 0)])
+
+
 class PersonForm(Form):
     name_person = StringField(
                             'Name',
@@ -25,9 +30,6 @@ class PersonForm(Form):
                             validators=[DataRequired(message = 'Required email'),
                                         Email(message = 'Enter a valid email'),
                                         ])
-
-    # Mitiga formaularios basura
-    honeypot = HiddenField('', validators=[Length(min = 0, max = 0)])
     #name_person_img = StringField(validators = [Length(min = 1)])
 
 
@@ -46,7 +48,6 @@ class PetForm(Form):
                             'Age pet',
                             validators=[DataRequired('Required age'),
                                         ])
-    honeypot = HiddenField('', validators=[Length(min = 0, max = 0)])
     #name_pet_img = StringField(validators = [Length(min = 1)])
 
 
@@ -56,4 +57,11 @@ class QueryPetForm(Form):
                         validators=[DataRequired(message = 'Required type pet'),
                                     Length(min = 1, max = 25, message = 'Enter a valid type pet'),
                                     ])
-    honeypot = HiddenField('', validators=[Length(min = 0, max = 0)])
+
+
+class AdoptPetForm(Form):
+    email_person = EmailField(
+                            'Email address',
+                            validators=[DataRequired(message = 'Required email'),
+                                        Email(message = 'Enter a valid email'),
+                                        ])

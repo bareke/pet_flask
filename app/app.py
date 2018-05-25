@@ -21,7 +21,7 @@ def create_app():
     # Init CRSF Protect
     csrf.init_app(app)
 
-    from .views import app_pet as pet_blueprint
+    from app.views.views import app_pet as pet_blueprint
     app.register_blueprint(pet_blueprint)
 
     @app.errorhandler(403)

@@ -7,11 +7,13 @@ from flask import redirect
 from flask import render_template
 from flask import request
 from flask import url_for
-from flask import make_response
 
-
-from .forms.forms import PetForm, PersonForm, QueryPetForm
-from .models.models import Pet, Person
+from app.forms.forms import PetForm
+from app.forms.forms import PersonForm
+from app.forms.forms import QueryPetForm
+from app.forms.forms import AdoptPetForm
+from app.models.models import Person
+from app.models.models import Pet
 from app.app import db
 
 app_pet = Blueprint('app_pet', __name__)
@@ -40,29 +42,42 @@ def index():
             }
     return render_template('index.html', **forms)
 
-
 @app_pet.route('/query/<type_pet>')
 def query_pets(type_pet):
-    query = Pet.query.filter_by(type_pet = type_pet, adopt = False).all()
+    query = Pet.query.filter_by(type_pet = type_pet).all()
+    #query = Pet.query.filter_by(type_pet = type_pet, adopt = False).all()
     return render_template('query.html', results = query)
-
 
 @app_pet.route('/registered/')
 def registered():
     return render_template('registered.html')
 
-
 @app_pet.route('/details/<int:id_pet>')
 def details_pet(id_pet):
-    pet = Pet.query.filter_by(id_pet = id_pet).first()
-    return render_template('details_pet.html', pet = pet)
+    form_adopt = AdoptPetForm()
+    pet = Pet.query.filter_by(id_pet = id_pet).one()
+    return render_template('details_pet.html', pet = pet, form_adopt = form_adopt)
 
+@app_pet.route('/adopt/<int:id_pet>', methods = ['GET', 'POST'])
+def adopt(id_pet):
+    form_adopt = AdoptPetForm(request.form)
+    if request.method == 'POST':
+        if form_adopt.validate():
+            pet = Pet.query.filter_by(id_pet = id_pet).one()
+            email = form_adopt.email_person.data
+            person = Person.query.filter_by(email_person = email).one()
+            person_adopt_pet(pet, person)
+            flash('Thanks for adopting a pet.')
+            return render_template('details_pet.html', pet = pet, form_adopt = form_adopt)
+    return render_template('adopt.html', form_adopt = form_adopt)
 
-@app_pet.route('/details')
-def adopt():
-    # TODO: Implementar la logica para adopción
-    pass
+def person_adopt_pet(pet, person):
+    pet.id_owner = person.id_person
+    pet.adopt = True
 
+    db.session.add(person)
+    db.session.add(pet)
+    db.session.commit()
 
 def register_person(form_person):
     person = Person(
@@ -73,7 +88,6 @@ def register_person(form_person):
                     )
     db.session.add(person)
     db.session.commit()
-
 
 def register_pet(form_pet):
     pet = Pet(

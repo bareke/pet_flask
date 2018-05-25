@@ -4,7 +4,9 @@
 
 	{% block content %}
 
-	<section id="three" class="wrapper">
+		{% from "macros/_macro.html" import render_field %}
+
+		<section id="three" class="wrapper">
 		<div class="inner">
 
 			<h2 id="content">Name: {{ pet.name_pet }} </h2>
@@ -25,9 +27,9 @@
 						{% endif %}
 
 						{% if pet.adopt == True %}
-						<li> Adopt: yes </li>
+						<li> Adopt: not available </li>
 						{% else %}
-						<li> Adop: available </li>
+						<li> Adopt: available </li>
 						{% endif %}
 
 						{% if pet.owner %}
@@ -41,11 +43,22 @@
 					</ul>
 				</div>
 				<div class="4u$ 12u$(medium)">
-					<a href="#" class="button alt">Adopt</a>
+				<form class="grid-form" action="{{ url_for('app_pet.adopt', id_pet = pet.id_pet) }}"  method="post" enctype="multipart/form-data">
+	        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+	        <div class="form-control">
+	          {{ render_field(form_adopt.email_person) }}
+	        </div>
+	        <div class="form-control narrow">
+	          {{ form_adopt.honeypot }}
+	        </div>
+	        <ul class="actions">
+	          <li><input name="adopt pet" value="Adopt pet" type="submit"></li>
+	        </ul>
+	      </form>
 				</div>
 			</div>
 
-			<a href="{{ url_for('app_pet.index') }}" class="button special">Back</a>
+			<a href="{{ url_for('app_pet.query_pets', type_pet = pet.type_pet) }}" class="button special">Back</a>
 		</div>
 
 	</section>

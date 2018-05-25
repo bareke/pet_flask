@@ -1,4 +1,4 @@
-from api import create_api
+from restful.api import create_api
 
 if __name__ == '__main__':
     app = create_api()

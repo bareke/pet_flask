@@ -7,8 +7,15 @@ from flask_restful import Resource
 from app.app import create_app, db
 from app.models.models import Pet
 
-app = create_app()
-api = Api(app)
+def create_api():
+    app = create_app()
+    api = Api(app)
+
+    # Resources routing
+    api.add_resource(PetList, '/pets')
+    api.add_resource(PetApi, '/pets/<id_pet>')
+
+    return app
 
 def abort_if_todo_doesnt_exist(id_pet):
     pet = Pet.query.filter(Pet.id_pet == id_pet).first()
@@ -100,14 +107,3 @@ class PetList(Resource):
             db.session.commit()
             return id_pet, 201
         return '', 204
-
-
-def create_api():
-    app = create_app()
-    api = Api(app)
-
-    # Resources routing
-    api.add_resource(PetList, '/pets')
-    api.add_resource(PetApi, '/pets/<id_pet>')
-
-    return app

@@ -18,7 +18,9 @@ class Person(db.Model):
     last_name_person = db.Column(db.String(25), nullable = False)
     telephone_person = db.Column(db.Integer(), nullable = False)
     email_person = db.Column(db.String(25), unique = True, nullable = False)
-    #name_profile_img = db.Column(db.String(45))
+
+    name_profile_img = db.Column(db.String, default = 'default.jpg' , nullable = True)
+    url_profile_img = db.Column(db.String, default = 'http://localhost:5000/static/profile_img/default.jpg' , nullable = True)
 
     # Relacion uno a muchos con la clase Mascota
     pets = db.relationship('Pet', backref = 'owner', lazy = True)
@@ -42,7 +44,9 @@ class Pet(db.Model):
     type_pet = db.Column(db.String(25), nullable = False)
     age_pet = db.Column(db.Integer(), nullable = False)
     adopt = db.Column(db.Boolean(), nullable = False, default = False)
-    #name_profile_img = db.Column(db.String(45))
+
+    name_profile_img = db.Column(db.String, default = 'default.jpg' , nullable = True)
+    url_profile_img = db.Column(db.String, default = 'http://localhost:5000/static/profile_img/default.jpg' , nullable = True)
 
     # Referencia a la clase Persona
     id_owner = db.Column(db.Integer,

@@ -4,7 +4,10 @@ Servicio web para la búsqueda de mascotas a adoptar.
 
 Inicialmente comenzó como un proyecto de estudio como parte de una charla sobre TDD/Web del grupo [Python Popayán](http://pythonpopayan.org/) pero debido al impacto que puede generar irá mutando para convertirse en un software completo al servicio de la ciudad de Popayán (Colombia).
 
-Desarrollada con [Flask](http://flask.pocoo.org/) y utlizando el template [Typify](https://templated.co/typify).
+Desarrollada con:
+- Micro-framework [Flask](http://flask.pocoo.org/)
+- Template [Typify](https://templated.co/typify)
+- Iconos de [Freepik](http://www.freepik.com) y [Flaticon](https://www.flaticon.com/)
 
 ---
 

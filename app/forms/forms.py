@@ -2,6 +2,8 @@ from wtforms import Form, StringField, TextField
 from wtforms import HiddenField, IntegerField, BooleanField
 from wtforms.validators import Required, Length, DataRequired, Email
 from wtforms.fields.html5 import EmailField
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+from app.app import images
 
 # Create your forms
 
@@ -30,7 +32,10 @@ class PersonForm(Form):
                             validators=[DataRequired(message = 'Required email'),
                                         Email(message = 'Enter a valid email'),
                                         ])
-    #name_person_img = StringField(validators = [Length(min = 1)])
+    profile_img = FileField('Profile image',
+                            validators=[#FileRequired(message = 'Required image'),
+                                        FileAllowed(images, 'Images only')
+                                        ])
 
 
 class PetForm(Form):
@@ -48,7 +53,10 @@ class PetForm(Form):
                             'Age pet',
                             validators=[DataRequired('Required age'),
                                         ])
-    #name_pet_img = StringField(validators = [Length(min = 1)])
+    profile_img = FileField('Profile image',
+                            validators=[#FileRequired(message = 'Required image'),
+                                        FileAllowed(images, 'Images only')
+                                        ])
 
 
 class QueryPetForm(Form):

@@ -1,4 +1,5 @@
 import os
+import sys
 import unittest
 from time import sleep
 
@@ -6,6 +7,7 @@ from flask_testing import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
+sys.path.append(os.getcwd())
 from app.app import create_app, db, TestingConfig
 
 # Tests Front-End

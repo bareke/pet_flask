@@ -1,6 +1,10 @@
+import os
+import sys
 import unittest
 
 from flask_testing import TestCase
+
+sys.path.append(os.getcwd())
 from app.app import create_app, db, TestingConfig
 from app.models.models import Pet, Person
 

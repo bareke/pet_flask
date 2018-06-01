@@ -2,12 +2,16 @@ from flask import Flask
 from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
+from flask_uploads import UploadSet
+from flask_uploads import IMAGES
+from flask_uploads import configure_uploads
 
 from .config import DevelopmentConfig
 from .config import TestingConfig
 
 db = SQLAlchemy()
 csrf = CSRFProtect()
+images = UploadSet('images', IMAGES)
 
 def create_app():
     app = Flask(__name__)
@@ -20,6 +24,9 @@ def create_app():
 
     # Init CRSF Protect
     csrf.init_app(app)
+
+    # Init flask uploads
+    configure_uploads(app, images)
 
     from app.views.views import app_pet as pet_blueprint
     app.register_blueprint(pet_blueprint)
